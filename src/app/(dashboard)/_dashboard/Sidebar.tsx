@@ -1,8 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { sidebarMenu } from './SidebarData';
+import { usePathname } from 'next/navigation';
 
 export default function Sidebar() {
+  const pathname = usePathname();
+   
+  
   return (
     <aside className="h-screen w-[260px] border-r border-sidebar-border bg-sidebar text-sidebar-foreground shadow-sm">
       <div className="flex h-full flex-col gap-5 p-4">

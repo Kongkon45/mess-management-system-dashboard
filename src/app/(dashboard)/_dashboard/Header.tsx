@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import PageHeader from './reusable/CustomTitleHeader';
 
 export default function Header() {
   const { setTheme } = useTheme();
@@ -18,7 +19,9 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between w-full">
       <div>
-        <h1 className="text-xl font-semibold">Dashboard</h1>
+        <PageHeader
+ 
+/>
       </div>
 
       {/* Theme Switcher */}
