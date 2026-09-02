@@ -4,6 +4,7 @@ import React from 'react';
 import Sidebar from './_dashboard/Sidebar';
 import Header from './_dashboard/Header';
 import { ThemeProvider } from './_dashboard/ThemeProvider';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export default function DashboardLayout({
   children,
@@ -12,17 +13,17 @@ export default function DashboardLayout({
 }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className="flex h-screen bg-background">
+      <SidebarProvider className="h-svh overflow-hidden">
         <Sidebar />
-        <div className="flex flex-1 flex-col">
+        <SidebarInset className="min-w-0 overflow-hidden bg-background">
           <div className="border-b border-border bg-background px-6 py-4 shadow-sm">
             <Header />
           </div>
-          <main className="flex-1 overflow-y-auto p-6">
+          <main className="min-w-0 flex-1 overflow-auto p-6">
             {children}
           </main>
-        </div>
-      </div>
+        </SidebarInset>
+      </SidebarProvider>
     </ThemeProvider>
   );
 }

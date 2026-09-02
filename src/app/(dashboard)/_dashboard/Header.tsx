@@ -4,56 +4,37 @@ import React from 'react';
 import { Moon, Sun, User } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Switch } from '@/components/ui/switch';
 import PageHeader from './reusable/CustomTitleHeader';
 
 export default function Header() {
-  const { setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === 'dark';
 
   return (
-    <header className="flex items-center justify-between w-full">
-      <div>
-        <PageHeader
- 
-/>
+    <header className="flex w-full min-w-0 items-center justify-between gap-3">
+      <div className="flex min-w-0 items-center gap-3">
+        <SidebarTrigger />
+        <PageHeader />
       </div>
 
-      {/* Theme Switcher */}
-   <div className="flex items-center gap-2">
-       <DropdownMenu>
-        <DropdownMenuTrigger >
-          <Button variant="outline" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-
-            <span className="sr-only">Toggle theme</span>
-          </Button>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => setTheme('light')}>
-            Light
-          </DropdownMenuItem>
-
-          <DropdownMenuItem onClick={() => setTheme('dark')}>
-            Dark
-          </DropdownMenuItem>
-
-          <DropdownMenuItem onClick={() => setTheme('system')}>
-            System
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <div><User/></div>
-   </div>
+      <div className="flex shrink-0 items-center gap-2">
+        <Sun className="size-4 text-muted-foreground" aria-hidden="true" />
+        <Switch
+          checked={isDark}
+          onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+          aria-label="Toggle dark mode"
+        />
+        <Moon className="size-4 text-muted-foreground" aria-hidden="true" />
+        <User className="ml-1 size-5" />
+      </div>
     </header>
   );
 }

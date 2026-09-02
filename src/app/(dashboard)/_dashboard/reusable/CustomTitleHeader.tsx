@@ -39,7 +39,7 @@ export default function PageHeader() {
   };
 
   return (
-    <div className="space-y-1">
+    <div className="min-w-0 space-y-1">
       <h1 className="text-xl font-semibold text-headerColor">
         {currentPage.title}
       </h1>
