@@ -9,6 +9,10 @@ import {
   CreditCard,
   BarChart3,
   Settings,
+  ClipboardList,
+  Store,
+  ReceiptText,
+  CalendarCheck,
   LucideIcon,
 } from 'lucide-react';
 
@@ -22,52 +26,68 @@ export interface SidebarSection {
   items: SidebarItem[];
 }
 
-export const sidebarMenu: SidebarSection[] = [
+export const adminSidebarMenu: SidebarSection[] = [
   {
     items: [
       {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/admin/dashboard',
         icon: LayoutDashboard,
       },
       {
-        title: 'Meals',
-        href: '/meals',
+        title: 'Member Management',
+        href: '/member-management',
+        icon: Users,
+      },
+      {
+        title: 'Meal Management',
+        href: '/meal-management',
         icon: Utensils,
       },
       {
-        title: 'Add Meal',
-        href: '/meals/add',
-        icon: Plus,
+        title: 'Market Management',
+        href: '/market-management',
+        icon: Store,
       },
-     
+      {
+        title: 'Utility Management',
+        href: '/utility-management',
+        icon: ReceiptText,
+      },
+      {
+        title: 'Monthly Selection',
+        href: '/monthly-selection',
+        icon: CalendarCheck,
+      },
+    ],
+  },
+];
+
+export const memberSidebarMenu: SidebarSection[] = [
+  {
+    items: [
+      {
+        title: 'Dashboard',
+        href: '/user/dashboard',
+        icon: LayoutDashboard,
+      },
+      {
+        title: 'My Meals',
+        href: '/meals',
+        icon: Utensils,
+      },
       {
         title: 'Meal Schedule',
         href: '/meal-schedule',
         icon: CalendarDays,
       },
-     
-      {
-        title: 'Users',
-        href: '/users',
-        icon: Users,
-      },
-      {
-        title: 'Payments',
-        href: '/payments',
-        icon: CreditCard,
-      },
-      {
-        title: 'Reports',
-        href: '/reports',
-        icon: BarChart3,
-      },
-      {
-        title: 'Settings',
-        href: '/settings',
-        icon: Settings,
-      },
     ],
   },
 ];
+
+export const settingsItem: SidebarItem = {
+  title: 'Settings',
+  href: '/settings',
+  icon: Settings,
+};
 

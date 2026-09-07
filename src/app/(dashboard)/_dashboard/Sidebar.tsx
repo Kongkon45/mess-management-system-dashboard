@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { sidebarMenu } from './SidebarData';
+import { adminSidebarMenu, memberSidebarMenu, settingsItem } from './SidebarData';
 import { usePathname } from 'next/navigation';
 import {
   Sidebar as SidebarPrimitive,
@@ -8,21 +10,32 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
+  SidebarFooter,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import Image from 'next/image';
+import { useRole } from './roles/RoleContext';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { role } = useRole();
+  const sidebarMenu = role === 'admin' ? adminSidebarMenu : memberSidebarMenu;
 
   return (
     <SidebarPrimitive collapsible="icon">
-      <SidebarHeader className="p-4 group-data-[collapsible=icon]:px-2">
-        <p className="truncate px-2 text-lg font-semibold tracking-tight text-sidebar-foreground group-data-[collapsible=icon]:hidden">
-          Mess Manager
-        </p>
-      </SidebarHeader>
+      <SidebarHeader className="p-4 group-data-[collapsible=icon]:p-2">
+  <div className="flex items-center justify-center">
+    <Image
+      src="/images/logo.png"
+      alt="logo"
+      width={80}
+      height={80}
+      className="object-contain"
+    />
+  </div>
+</SidebarHeader>
 
       <SidebarContent>
         {sidebarMenu.map((section) => (
@@ -56,6 +69,20 @@ export default function Sidebar() {
           </SidebarGroup>
         ))}
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              render={<Link href={settingsItem.href} />}
+              isActive={pathname === settingsItem.href}
+              tooltip={settingsItem.title}
+            >
+              <settingsItem.icon />
+              <span>{settingsItem.title}</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </SidebarPrimitive>
   );
 }
